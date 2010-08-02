@@ -90,14 +90,13 @@ class iMagickFx
     if (substr($name, 0, 2) === 'fx')
     {
       $fxName = basename(substr($name, 2));
+      $className = 'iMagickEffect' . $fxName;
       $fxFile = dirname(__FILE__) . '/fx/' . strtolower($fxName) . '.php';
 
-      if (file_exists($fxFile))
+      if (false === class_exists($className) && true === file_exists($fxFile))
       {
         require_once $fxFile;
       }
-
-      $className = 'iMagickEffect' . $fxName;
 
       if (class_exists($className))
       {
